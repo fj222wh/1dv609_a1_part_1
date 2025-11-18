@@ -17,8 +17,13 @@ describe('Password class, test suite', () => {
     //put constants here to increase readability
     const emptyPassword = '';
 
-    test('Constructor Should Throw Exception For Short Passwords', () => {
+    test('Constructor Should Throw Exception For Short Passwords (without number)', () => {
         expect(() => new Password('fkfo')).toThrow('Too short password')
+    });
+
+
+    test('Constructor Should Throw Exception For Short Passwords (with number)', () => {
+        expect(() => new Password('fkfo2')).toThrow('Too short password')
     });
 
     test('Constructor Should Throw Exception For No Number In Password', () => {
@@ -29,6 +34,7 @@ describe('Password class, test suite', () => {
         const password = new Password('myLittlePassword123')
         expect(password.getPasswordHash()).toBe(2.3067788298475823e+29)
     })
+
 
     //Add your tests here
 });
