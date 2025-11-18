@@ -44,5 +44,14 @@ describe('Password class, test suite', () => {
 
 
 
+    test('Should Return False when Passwords Are Not Same', () => {
+        const password1 = new Password('hellllooooo1')
+        const password2 = new Password('helllloooooooo1')
+
+        expect(password1.isPasswordSame(password2)).toBe(false)
+    })
+
+
+
     //Add your tests here
 });
