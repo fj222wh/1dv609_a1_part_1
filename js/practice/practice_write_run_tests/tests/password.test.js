@@ -35,6 +35,14 @@ describe('Password class, test suite', () => {
         expect(password.getPasswordHash()).toBe(2.3067788298475823e+29)
     })
 
+    test('Should Return True when Passwords Are The Same', () => {
+        const password1 = new Password('hellllooooo1')
+        const password2 = new Password('hellllooooo1')
+
+        expect(password1.isPasswordSame(password2)).toBe(true)
+    })
+
+
 
     //Add your tests here
 });
