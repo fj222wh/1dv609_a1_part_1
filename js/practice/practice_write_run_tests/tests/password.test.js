@@ -25,5 +25,10 @@ describe('Password class, test suite', () => {
         expect(() => new Password('erkfoefroepo')).toThrow('No number found')
     })
 
+    test('Should Create The Password Hash Succesfully', () => {
+        const password = new Password('myLittlePassword123')
+        expect(password.getPasswordHash()).toBe(2.3067788298475823e+29)
+    })
+
     //Add your tests here
 });
