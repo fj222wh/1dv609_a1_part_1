@@ -18,9 +18,12 @@ describe('Password class, test suite', () => {
     const emptyPassword = '';
 
     test('Constructor Should Throw Exception For Short Passwords', () => {
-    
-    expect(() => new Password('fkfo')).toThrow('Too short password')
+        expect(() => new Password('fkfo')).toThrow('Too short password')
     });
+
+    test('Constructor Should Throw Exception For No Number In Password', () => {
+        expect(() => new Password('erkfoefroepo')).toThrow('No number found')
+    })
 
     //Add your tests here
 });
