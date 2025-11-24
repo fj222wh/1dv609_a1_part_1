@@ -13,6 +13,8 @@
 // import { Password } from '../src/BugWrongMessage' ✅
 import { Password } from '../src/Correct'
 
+// TODO: Refacor, create instants to increase readability
+
 
 
 describe('Password class, test suite', () => {
@@ -23,13 +25,15 @@ describe('Password class, test suite', () => {
     const shortPassWordWithNumber = '22egeggo'
 
 
-    // Boundary values for password?
-
     test('Constructor Should Throw Exception For Empty Password', () => {
         expect(() => new Password(emptyPassword)).toThrow('Too short password')
     });
 
+    test('Constructor Should Not Throw For Valid Password', () => {
+        expect(() => new Password(validPassword)).not.toThrow()
+    })
 
+    
     test('Constructor Should Throw Exception For Short Passwords (without number)', () => {
         expect(() => new Password('hellohelloh')).toThrow('Too short password')
         expect(() => new Password(shortPasswordWithoutNumber)).toThrow('Too short password')
