@@ -7,23 +7,31 @@
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugMissingPasswordCheck'
 // import { Password } from '../src/BugNeverContainsNumbers'
-// import { Password } from '../src/BugToShortPassword'
+import { Password } from '../src/BugToShortPassword'
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugWrongHashingAlgorithm'
 // import { Password } from '../src/BugWrongMessage'
-import { Password } from '../src/Correct'
+// import { Password } from '../src/Correct'
 
 describe('Password class, test suite', () => {
     //put constants here to increase readability
     const emptyPassword = '';
+    const shortPasswordWithoutNumber = 'jojlkjge'
+    const shortPassWordWithNumber = '22egeggo'
+
+    // Boundary values for password?
+
+    test('Constructor Should Throw Exception For Empty Password', () => {
+        expect(() => new Password(emptyPassword)).toThrow('Too short password')
+    });
 
     test('Constructor Should Throw Exception For Short Passwords (without number)', () => {
-        expect(() => new Password('fkfo')).toThrow('Too short password')
+        expect(() => new Password(shortPasswordWithoutNumber)).toThrow('Too short password')
     });
 
 
-    test('Constructor Should Throw Exception For Short Passwords (with number)', () => {
-        expect(() => new Password('fkfo2')).toThrow('Too short password')
+    test('Constructor Should Throw Exception For Short Passwords (with number)', () => {3
+        expect(() => new Password(shortPassWordWithNumber)).toThrow('Too short password')
     });
 
     test('Constructor Should Throw Exception For No Number In Password', () => {
@@ -36,6 +44,7 @@ describe('Password class, test suite', () => {
     })
 
     test('Should Return True when Passwords Are The Same', () => {
+        // Need to check validation for the password???
         const password1 = new Password('hellllooooo1')
         const password2 = new Password('hellllooooo1')
 
@@ -45,6 +54,7 @@ describe('Password class, test suite', () => {
 
 
     test('Should Return False when Passwords Are Not Same', () => {
+        // need to check validation??? 
         const password1 = new Password('hellllooooo1')
         const password2 = new Password('hellllooooooo1')
         expect(password1.isPasswordSame(password2)).toBe(false)
