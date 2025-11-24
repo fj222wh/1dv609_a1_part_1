@@ -1,21 +1,17 @@
 
 // Select one of the Password versions to test
 
-// import { Password } from '../src/BugDoesNotHash' ✅
-// import { Password } from '../src/BugDoesNotTrim' ✅
-// import { Password } from '../src/BugisPasswordAlwaysSame' ✅
-// import { Password } from '../src/BugMissingNumberCheck' ✅
-// import { Password } from '../src/BugMissingPasswordCheck' ✅
+// import { Password } from '../src/BugDoesNotHash'
+// import { Password } from '../src/BugDoesNotTrim'
+// import { Password } from '../src/BugisPasswordAlwaysSame'
+// import { Password } from '../src/BugMissingNumberCheck'
+// import { Password } from '../src/BugMissingPasswordCheck'
 // import { Password } from '../src/BugNeverContainsNumbers'
-// import { Password } from '../src/BugToShortPassword' ✅
-// import { Password } from '../src/BugVeryShort' ✅
-// import { Password } from '../src/BugWrongHashingAlgorithm' ✅
-// import { Password } from '../src/BugWrongMessage' ✅
-import { Password } from '../src/Correct'
-
-// TODO: Refacor, create instants to increase readability
-
-
+// import { Password } from '../src/BugToShortPassword'
+// import { Password } from '../src/BugVeryShort'
+// import { Password } from '../src/BugWrongHashingAlgorithm'
+import { Password } from '../src/BugWrongMessage'
+// import { Password } from '../src/Correct'
 
 describe('Password class, test suite', () => {
     //put constants here to increase readability
@@ -80,6 +76,11 @@ describe('Password class, test suite', () => {
     test('Should Throw If Comparing To Something Else Than A Password', () => {
     const password = new Password(validPassword)
     expect(() => password.isPasswordSame('hej')).toThrow('Invalid argument')
-})
+    })
+
+    test('Should Hash Password', () => {
+        const password = new Password(validPassword)
+        expect(password.getPasswordHash()).not.toBe(validPassword)
+    })
 
 });
