@@ -1,13 +1,13 @@
 
 // Select one of the Password versions to test
 
-// import { Password } from '../src/BugDoesNotHash'
-// import { Password } from '../src/BugDoesNotTrim'
-// import { Password } from '../src/BugisPasswordAlwaysSame'
-// import { Password } from '../src/BugMissingNumberCheck'
+// import { Password } from '../src/BugDoesNotHash' ✅
+// import { Password } from '../src/BugDoesNotTrim' ✅
+// import { Password } from '../src/BugisPasswordAlwaysSame' ✅
+// import { Password } from '../src/BugMissingNumberCheck' ✅
 // import { Password } from '../src/BugMissingPasswordCheck'
 // import { Password } from '../src/BugNeverContainsNumbers'
-import { Password } from '../src/BugToShortPassword'
+// import { Password } from '../src/BugToShortPassword'
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugWrongHashingAlgorithm'
 // import { Password } from '../src/BugWrongMessage'
@@ -24,6 +24,11 @@ describe('Password class, test suite', () => {
     test('Constructor Should Throw Exception For Empty Password', () => {
         expect(() => new Password(emptyPassword)).toThrow('Too short password')
     });
+
+    test('Should Fail If Not Trimmed', () => {
+        const password = new Password(' myLittlePassword123 ')
+        expect(password.getPasswordHash()).toBe(2.3067788298475823e+29)
+    })
 
     test('Constructor Should Throw Exception For Short Passwords (without number)', () => {
         expect(() => new Password(shortPasswordWithoutNumber)).toThrow('Too short password')
