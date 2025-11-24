@@ -2,22 +2,26 @@
 // Select one of the Password versions to test
 
 // import { Password } from '../src/BugDoesNotHash' ✅
-// import { Password } from '../src/BugDoesNotTrim' 
+// import { Password } from '../src/BugDoesNotTrim' ✅
 // import { Password } from '../src/BugisPasswordAlwaysSame' ✅
 // import { Password } from '../src/BugMissingNumberCheck' ✅
-// import { Password } from '../src/BugMissingPasswordCheck'
+// import { Password } from '../src/BugMissingPasswordCheck' ✅
 // import { Password } from '../src/BugNeverContainsNumbers'
-// import { Password } from '../src/BugToShortPassword'
-// import { Password } from '../src/BugVeryShort'
-// import { Password } from '../src/BugWrongHashingAlgorithm'
+// import { Password } from '../src/BugToShortPassword' ✅
+// import { Password } from '../src/BugVeryShort' ✅
+// import { Password } from '../src/BugWrongHashingAlgorithm' ✅
 // import { Password } from '../src/BugWrongMessage' ✅
 import { Password } from '../src/Correct'
+
+
 
 describe('Password class, test suite', () => {
     //put constants here to increase readability
     const emptyPassword = ' ';
+    const validPassword = 'mySafeTestPassword123'
     const shortPasswordWithoutNumber = 'jojlkjge'
     const shortPassWordWithNumber = '22egeggo'
+
 
     // Boundary values for password?
 
@@ -27,12 +31,16 @@ describe('Password class, test suite', () => {
 
 
     test('Constructor Should Throw Exception For Short Passwords (without number)', () => {
+        expect(() => new Password('hellohelloh')).toThrow('Too short password')
         expect(() => new Password(shortPasswordWithoutNumber)).toThrow('Too short password')
+        expect(() => new Password('h')).toThrow('Too short password')
     });
 
 
     test('Constructor Should Throw Exception For Short Passwords (with number)', () => {3
+        expect(() => new Password('hellohello1')).toThrow('Too short password')
         expect(() => new Password(shortPassWordWithNumber)).toThrow('Too short password')
+        expect(() => new Password('h1')).toThrow('Too short password')
     });
 
     test('Constructor Should Throw Exception For No Number In Password', () => {
@@ -65,7 +73,9 @@ describe('Password class, test suite', () => {
         expect(password1.isPasswordSame(password2)).toBe(false)
     })
 
+    test('Should Throw If Comparing To Something Else Than A Password', () => {
+    const password = new Password(validPassword)
+    expect(() => password.isPasswordSame('hej')).toThrow('Invalid argument')
+})
 
-
-    //Add your tests here
 });
