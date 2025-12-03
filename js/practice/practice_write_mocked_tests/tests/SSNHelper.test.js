@@ -3,10 +3,10 @@ import { SSNHelper } from '../src/correct/SSNHelper';
 
 
 describe('SSNHelper Tests', () => {
-    const validInput = '991218-4382'
-    const oneCharLessThanMinimum = '991218-438'
-    const oneCharMoreThanMinimum = '991218-43889'
-    const invalidFormat = '9912-173948'
+    const snn_validInput = '991218-4382'
+    const snn_oneCharLessThanMinimum = '991218-438'
+    const snn_oneCharMoreThanMinimum = '991218-43889'
+    const snn_invalidFormat = '9912-173948'
 
     const validMonthMin = '1'
     const validMonthMax = '12'
@@ -26,23 +26,23 @@ describe('SSNHelper Tests', () => {
 
 
     test('Should Return True If Length Is Correct', () => {
-        expect(ssnHelper.isCorrectLength(validInput)).toBe(true)
+        expect(ssnHelper.isCorrectLength(snn_validInput)).toBe(true)
     });
 
     test('Should Return False If Length Is Too Short', () => {
-        expect(ssnHelper.isCorrectLength(oneCharLessThanMinimum)).toBe(false)
+        expect(ssnHelper.isCorrectLength(snn_oneCharLessThanMinimum)).toBe(false)
     });
 
     test('Should Return False If Length Is Too Long', () => {
-        expect(ssnHelper.isCorrectLength(oneCharMoreThanMinimum)).toBe(false)
+        expect(ssnHelper.isCorrectLength(snn_oneCharMoreThanMinimum)).toBe(false)
     });
 
     test('Should return True If Format Is Valid', () => {
-        expect(ssnHelper.isCorrectFormat(validInput)).toBe(true)
+        expect(ssnHelper.isCorrectFormat(snn_validInput)).toBe(true)
     })
 
     test('Should Return False If Format Is Invalid', () => {
-        expect(ssnHelper.isCorrectFormat(invalidFormat)).toBe(false)
+        expect(ssnHelper.isCorrectFormat(snn_invalidFormat)).toBe(false)
     })
 
     test('Should Return True For Valid Month (min value)', () => {
@@ -90,6 +90,15 @@ describe('SSNHelper Tests', () => {
 
     test('Should Return False For A Valid Day (not a number)', () => {
         expect(ssnHelper.isValidDay(invalidDayNotANumber)).toBe(false)
+    })
+
+
+    test('Should Return False When Checking Luhnis With Invalid Input', () => {
+        expect(ssnHelper.luhnisCorrect(snn_invalidFormat)).toBe(false)
+    })
+
+    test('Should Return True When Checking Luhnis With Valid Input', () => {
+        expect(ssnHelper.luhnisCorrect(snn_validInput)).toBe(false)
     })
 
 });
