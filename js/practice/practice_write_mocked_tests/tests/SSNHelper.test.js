@@ -10,9 +10,16 @@ describe('SSNHelper Tests', () => {
 
     const validMonthMin = '1'
     const validMonthMax = '12'
-    const monthOneBelowMin = '0'
-    const monthOneAboveMax = '13'
+    const invalidMonthOneBelowMin = '0'
+    const invalidMonthOneAboveMax = '13'
     const invalidMonth = 'hej'
+
+    const validDay = '15'
+    const validDayMin = '1'
+    const validDayMax = '31'
+    const invalidDayOneBelowMin = '0'
+    const invalidOneAboveMax = '32'
+    const invalidNotANumber = 'hej'
 
     const ssnHelper = new SSNHelper()
     //put constants here to increase readability
@@ -48,18 +55,20 @@ describe('SSNHelper Tests', () => {
     })
 
     test('Should Return False For Invalid Month (just below minimum)', () => {
-        expect(ssnHelper.isValidMonth(monthOneBelowMin)).toBe(false)
+        expect(ssnHelper.isValidMonth(invalidMonthOneBelowMin)).toBe(false)
     })
 
     test('Should Return False For Invalid Month (just above maximum)', () => {
-        expect(ssnHelper.isValidMonth(monthOneAboveMax)).toBe(false)
+        expect(ssnHelper.isValidMonth(invalidMonthOneAboveMax)).toBe(false)
     })
 
     test('Should Return False For Invalid Month', () => {
         expect(ssnHelper.isValidMonth(invalidMonth)).toBe(false)
     })
 
-
+    test('Should Return True For A Valid Day', () => {
+        expect(ssnHelper.isValidDay(validDay)).toBe(true)
+    })
 
 
   
