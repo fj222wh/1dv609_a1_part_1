@@ -47,6 +47,18 @@ describe('SSNHelper Tests', () => {
         expect(ssnHelper.isValidMonth(validMonthMax)).toBe(true)
     })
 
+    test('Should Return False For Invalid Month (just below minimum)', () => {
+        expect(ssnHelper.isValidMonth(monthOneBelowMin)).toBe(false)
+    })
+
+    test('Should Return False For Invalid Month (just above maximum)', () => {
+        expect(ssnHelper.isValidMonth(monthOneAboveMax)).toBe(false)
+    })
+
+    test('Should Return False For Invalid Month', () => {
+        expect(ssnHelper.isValidMonth(invalidMonth)).toBe(false)
+    })
+
 
 
 
