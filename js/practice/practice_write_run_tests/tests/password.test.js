@@ -21,11 +21,6 @@ describe('Password class, test suite', () => {
     const oneCharBelowMinimum = 'q4Jt9bXeLrp'
     const oneCharAboveMinimum = 'nA7ctxQp3RbLw'
 
-
-    const shortPasswordWithoutNumber = 'jojlkjge'
-    const shortPassWordWithNumber = '22egeggo'
-
-
     test('Constructor Should Throw Exception For Empty Password', () => {
         expect(() => new Password(emptyPassword)).toThrow('Too short password')
     });

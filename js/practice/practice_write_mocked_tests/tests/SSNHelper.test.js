@@ -8,5 +8,4 @@ describe('SSNHelpe Tests', () => {
         expect(true).toBe(true);
     });
 
-    //Add your tests here
 });

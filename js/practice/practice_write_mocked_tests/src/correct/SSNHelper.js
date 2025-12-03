@@ -19,7 +19,7 @@ class SSNHelper {
         return day >= 1 && day <= 31;
     }
 
-    luhnisCorrect(stringInput) {    
+    luhnisCorrect(stringInput) {
         
         const digits = stringInput.replace('-', '').split('').map(Number);
         let sum = 0;
