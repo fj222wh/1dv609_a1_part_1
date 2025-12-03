@@ -8,6 +8,12 @@ describe('SSNHelper Tests', () => {
     const oneCharMoreThanMinimum = '991218-43889'
     const invalidFormat = '9912-173948'
 
+    const validMonthMin = '1'
+    const validMonthMax = '12'
+    const monthOneBelowMin = '0'
+    const monthOneAboveMax = '13'
+    const invalidMonth = 'hej'
+
     const ssnHelper = new SSNHelper()
     //put constants here to increase readability
 
@@ -31,6 +37,17 @@ describe('SSNHelper Tests', () => {
     test('Should Return False If Format Is Invalid', () => {
         expect(ssnHelper.isCorrectFormat(invalidFormat)).toBe(false)
     })
+
+    test('Should Return True For Valid Month (min value)', () => {
+        expect(ssnHelper.isValidMonth(validMonthMin)).toBe(true)
+    })
+
+
+    test('Should Return True For Valid Month (min value)', () => {
+        expect(ssnHelper.isValidMonth(validMonthMax)).toBe(true)
+    })
+
+
 
 
   
