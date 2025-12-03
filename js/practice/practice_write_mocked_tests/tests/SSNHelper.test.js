@@ -18,8 +18,8 @@ describe('SSNHelper Tests', () => {
     const validDayMin = '1'
     const validDayMax = '31'
     const invalidDayOneBelowMin = '0'
-    const invalidOneAboveMax = '32'
-    const invalidNotANumber = 'hej'
+    const invalidDayOneAboveMax = '32'
+    const invalidDayNotANumber = 'hej'
 
     const ssnHelper = new SSNHelper()
     //put constants here to increase readability
@@ -79,7 +79,17 @@ describe('SSNHelper Tests', () => {
         expect(ssnHelper.isValidDay(validDayMax)).toBe(true)
     })
 
-  
 
+    test('Should Return False For A Valid Day (one less than boundary value)', () => {
+        expect(ssnHelper.isValidDay(invalidDayOneBelowMin)).toBe(false)
+    })
+
+    test('Should Return False For A Valid Day (one above than boundary value)', () => {
+        expect(ssnHelper.isValidDay(invalidDayOneAboveMax)).toBe(false)
+    })
+
+    test('Should Return False For A Valid Day (not a number)', () => {
+        expect(ssnHelper.isValidDay(invalidDayNotANumber)).toBe(false)
+    })
 
 });
