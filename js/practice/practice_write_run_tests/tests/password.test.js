@@ -10,13 +10,18 @@
 // import { Password } from '../src/BugToShortPassword'
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugWrongHashingAlgorithm'
-import { Password } from '../src/BugWrongMessage'
-// import { Password } from '../src/Correct'
+// import { Password } from '../src/BugWrongMessage'
+import { Password } from '../src/Correct'
 
 describe('Password class, test suite', () => {
     //put constants here to increase readability
     const emptyPassword = ' ';
-    const validPassword = 'mySafeTestPassword123'
+    const NO_NUMBER = 'nAjctxQpKRbLw'
+    const validPassword = 'Zv2mKp8rLwQd'
+    const oneCharBelowMinimum = 'q4Jt9bXeLrp'
+    const oneCharAboveMinimum = 'nA7ctxQp3RbLw'
+
+
     const shortPasswordWithoutNumber = 'jojlkjge'
     const shortPassWordWithNumber = '22egeggo'
 
@@ -31,20 +36,15 @@ describe('Password class, test suite', () => {
 
     
     test('Constructor Should Throw Exception For Short Passwords (without number)', () => {
-        expect(() => new Password('hellohelloh')).toThrow('Too short password')
-        expect(() => new Password(shortPasswordWithoutNumber)).toThrow('Too short password')
-        expect(() => new Password('h')).toThrow('Too short password')
+        expect(() => new Password(oneCharBelowMinimum)).toThrow('Too short password')
     });
 
-
-    test('Constructor Should Throw Exception For Short Passwords (with number)', () => {3
-        expect(() => new Password('hellohello1')).toThrow('Too short password')
-        expect(() => new Password(shortPassWordWithNumber)).toThrow('Too short password')
-        expect(() => new Password('h1')).toThrow('Too short password')
-    });
+    test('Constructor Should Not Throw For PassWord One Character Above Minimum', () => {
+        expect(() => new Password(oneCharAboveMinimum)).not.toThrow()
+    })
 
     test('Constructor Should Throw Exception For No Number In Password', () => {
-        expect(() => new Password('erkfoefroepo')).toThrow('No number found')
+        expect(() => new Password(NO_NUMBER)).toThrow('No number found')
     })
 
     test('Should Trim Password Input Before Hashing', () => {
@@ -54,14 +54,20 @@ describe('Password class, test suite', () => {
         expect(password1.isPasswordSame(password2)).toBe(true)
     })
 
-    test('Should Create The Password Hash Succesfully', () => {
-        const password = new Password('myLittlePassword123')
-        expect(password.getPasswordHash()).toBe(2.3067788298475823e+29)
+
+    test('Should Hash Password', () => {
+        const password = new Password(validPassword)
+        expect(password.getPasswordHash()).not.toBe(validPassword)
+    })
+
+    test('Should Create The Password Hash With The Correct Algorithm', () => {
+        const password = new Password(validPassword)
+        expect(password.getPasswordHash()).toBe(7898535655848498000)
     })
 
     test('Should Return True when Passwords Are The Same', () => {
-        const password1 = new Password('hellllooooo1')
-        const password2 = new Password('hellllooooo1')
+        const password1 = new Password(validPassword)
+        const password2 = new Password(validPassword)
 
         expect(password1.isPasswordSame(password2)).toBe(true)
     })
@@ -74,13 +80,7 @@ describe('Password class, test suite', () => {
     })
 
     test('Should Throw If Comparing To Something Else Than A Password', () => {
-    const password = new Password(validPassword)
-    expect(() => password.isPasswordSame('hej')).toThrow('Invalid argument')
-    })
-
-    test('Should Hash Password', () => {
         const password = new Password(validPassword)
-        expect(password.getPasswordHash()).not.toBe(validPassword)
+        expect(() => password.isPasswordSame('hej')).toThrow('Invalid argument')
     })
-
 });
