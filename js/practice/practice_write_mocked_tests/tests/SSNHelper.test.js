@@ -10,8 +10,19 @@ describe('SSNHelper Tests', () => {
     //put constants here to increase readability
 
 
-    test('Should Not Throw If Length Is Correct', () => {
-        expect(ssnHelper.isCorrectLength(correctLength)).toBe(true)
+    test('Should Return True If Length Is Correct', () => {
+        expect(ssnHelper.isCorrectLength(validInput)).toBe(true)
     });
+
+    test('Should Return False If Length Is Too Short', () => {
+        expect(ssnHelper.isCorrectLength(oneCharLessThanMinimum)).toBe(false)
+    });
+
+    test('Should Return False If Length Is Too Long', () => {
+        expect(ssnHelper.isCorrectLength(oneCharMoreThanMinimum)).toBe(false)
+    });
+
+  
+
 
 });
