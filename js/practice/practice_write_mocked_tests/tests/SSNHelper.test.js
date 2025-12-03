@@ -70,6 +70,14 @@ describe('SSNHelper Tests', () => {
         expect(ssnHelper.isValidDay(validDay)).toBe(true)
     })
 
+    test('Should Return True For A Valid Day (min value)', () => {
+        expect(ssnHelper.isValidDay(validDayMin)).toBe(true)
+    })
+
+
+    test('Should Return True For A Valid Day (max value)', () => {
+        expect(ssnHelper.isValidDay(validDayMax)).toBe(true)
+    })
 
   
 
