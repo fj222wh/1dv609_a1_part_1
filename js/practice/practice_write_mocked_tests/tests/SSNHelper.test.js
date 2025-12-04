@@ -1,6 +1,4 @@
-import { SSNHelper } from '../src/correct/SSNHelper'; 
-
-
+import { SSNHelper } from '../src/correct/SSNHelper';
 
 describe('SSNHelper Tests', () => {
     const snn_validInput = '991218-4382'
@@ -23,7 +21,6 @@ describe('SSNHelper Tests', () => {
 
     const ssnHelper = new SSNHelper()
     //put constants here to increase readability
-
 
     test('Should Return True If Length Is Correct', () => {
         expect(ssnHelper.isCorrectLength(snn_validInput)).toBe(true)
@@ -98,7 +95,7 @@ describe('SSNHelper Tests', () => {
     })
 
     test('Should Return True When Checking Luhnis With Valid Input', () => {
-        expect(ssnHelper.luhnisCorrect(snn_validInput)).toBe(false)
+        expect(ssnHelper.luhnisCorrect(snn_validInput)).toBe(true)
     })
 
 });
