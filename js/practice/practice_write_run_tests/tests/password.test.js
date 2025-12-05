@@ -3,7 +3,7 @@
 
 // import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
-import { Password } from '../src/BugisPasswordAlwaysSame'
+// import { Password } from '../src/BugisPasswordAlwaysSame'
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugMissingPasswordCheck'
 // import { Password } from '../src/BugNeverContainsNumbers'
@@ -30,7 +30,7 @@ describe('Password class, test suite', () => {
     })
 
     
-    test('Constructor Should Throw Exception For Short Passwords (without number)', () => {
+    test('Constructor Should Throw Exception For Short Passwords', () => {
         expect(() => new Password(oneCharBelowMinimum)).toThrow('Too short password')
     });
 
