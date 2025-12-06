@@ -83,6 +83,18 @@ describe('SwedishSocialSecurityNumber Tests', () => {
         expect(() => new SwedishSocialSecurityNumber(snn_invalidDay, mockHelper)).toThrow('Invalid day in SSN')
     })
 
+    test('Constructor Should Throw Error If Invalid Luhns', () => {
+        const mockHelper = {
+            isCorrectLength: jest.fn().mockReturnValue(true),
+            isCorrectFormat: jest.fn().mockReturnValue(true),
+            isValidMonth: jest.fn().mockReturnValue(true),
+            isValidDay: jest.fn().mockReturnValue(true),
+            luhnisCorrect: jest.fn().mockReturnValue(false)
+        }
+
+        expect(() => new SwedishSocialSecurityNumber(snn_invalidLuhnis, mockHelper)).toThrow('Invalid SSN according to Luhn\'s algorithm')
+    })
+
     test('Should Trim White Spaces', () => {
         const mockHelper = {
             isCorrectLength: jest.fn().mockReturnValue(true),
