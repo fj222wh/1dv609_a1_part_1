@@ -1,5 +1,5 @@
 import { expect, jest, test } from '@jest/globals'
-// import { SwedishSocialSecurityNumber } from '../src/correct/SwedishSocialSecurityNumber.js';
+import { SwedishSocialSecurityNumber } from '../src/correct/SwedishSocialSecurityNumber.js';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoLenCheck';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoTrim';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecutityNumberNoLuhn';
@@ -81,6 +81,33 @@ describe('SwedishSocialSecurityNumber Tests', () => {
 
         const sut = new SwedishSocialSecurityNumber(snn_validInput, mockHelper)
         expect(sut.getYear()).toBe('90')
+    })
+
+
+    test('Should Return The Corresponding Month', () => {
+        const mockHelper = {
+            isCorrectLength: jest.fn().mockReturnValue(true),
+            isCorrectFormat: jest.fn().mockReturnValue(true),
+            isValidMonth: jest.fn().mockReturnValue(true),
+            isValidDay: jest.fn().mockReturnValue(true),
+            luhnisCorrect: jest.fn().mockReturnValue(true)
+        }
+
+        const sut = new SwedishSocialSecurityNumber(snn_validInput, mockHelper)
+        expect(sut.getMonth()).toBe('05')
+    })
+
+    test('Should Return The Corresponding Day', () => {
+        const mockHelper = {
+            isCorrectLength: jest.fn().mockReturnValue(true),
+            isCorrectFormat: jest.fn().mockReturnValue(true),
+            isValidMonth: jest.fn().mockReturnValue(true),
+            isValidDay: jest.fn().mockReturnValue(true),
+            luhnisCorrect: jest.fn().mockReturnValue(true)
+        }
+
+        const sut = new SwedishSocialSecurityNumber(snn_validInput, mockHelper)
+        expect(sut.getDay()).toBe('15')
     })
 
     
