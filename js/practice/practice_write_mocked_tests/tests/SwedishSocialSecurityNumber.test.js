@@ -1,7 +1,7 @@
 import { expect, jest, test } from '@jest/globals'
 // import { SwedishSocialSecurityNumber } from '../src/correct/SwedishSocialSecurityNumber.js';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoLenCheck';
-import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoTrim';
+// import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoTrim';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecutityNumberNoLuhn';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecutityNumberWrongYear';
 
@@ -68,7 +68,21 @@ describe('SwedishSocialSecurityNumber Tests', () => {
         expect(mockHelper.isCorrectLength).toHaveBeenCalledWith(snn_validInput)
         expect(mockHelper.isCorrectFormat).toHaveBeenCalledWith(snn_validInput)
         expect(mockHelper.luhnisCorrect).toHaveBeenCalledWith(snn_validInput)
-
     })
+
+    test('Should Return The Corresponding Year', () => {
+        const mockHelper = {
+            isCorrectLength: jest.fn().mockReturnValue(true),
+            isCorrectFormat: jest.fn().mockReturnValue(true),
+            isValidMonth: jest.fn().mockReturnValue(true),
+            isValidDay: jest.fn().mockReturnValue(true),
+            luhnisCorrect: jest.fn().mockReturnValue(true)
+        }
+
+        const sut = new SwedishSocialSecurityNumber(snn_validInput, mockHelper)
+        expect(sut.getYear()).toBe('90')
+    })
+
+    
 
 });
