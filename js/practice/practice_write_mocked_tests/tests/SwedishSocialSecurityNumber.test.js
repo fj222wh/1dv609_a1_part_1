@@ -10,6 +10,7 @@ import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecur
 describe('SwedishSocialSecurityNumber Tests', () => {
 
     const snn_validInput = '900515-1239'
+    const snn_validInput_with_spaces = '  900515-1239'
     const snn_invalid = '991203-1453'
     const snn_too_short = '900515-123'
     const snn_oneCharMoreThanMinimum = '900515-12393'
@@ -52,6 +53,22 @@ describe('SwedishSocialSecurityNumber Tests', () => {
     
         expect(() => new SwedishSocialSecurityNumber(snn_too_short, mockHelper)).toThrow("To short, must be 11 characters");
   
+    })
+
+    test('Should Trim White Spaces', () => {
+        const mockHelper = {
+            isCorrectLength: jest.fn().mockReturnValue(true),
+            isCorrectFormat: jest.fn().mockReturnValue(true),
+            isValidMonth: jest.fn().mockReturnValue(true),
+            isValidDay: jest.fn().mockReturnValue(true),
+            luhnisCorrect: jest.fn().mockReturnValue(true)
+        }
+
+        const sut = new SwedishSocialSecurityNumber(snn_validInput_with_spaces, mockHelper)
+        expect(mockHelper.isCorrectLength).toHaveBeenCalledWith(snn_validInput)
+        expect(mockHelper.isCorrectFormat).toHaveBeenCalledWith(snn_validInput)
+        expect(mockHelper.luhnisCorrect).toHaveBeenCalledWith(snn_validInput)
+
     })
 
 });
