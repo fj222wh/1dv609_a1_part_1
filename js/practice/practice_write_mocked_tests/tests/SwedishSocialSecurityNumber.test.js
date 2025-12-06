@@ -14,10 +14,20 @@ import { SwedishSocialSecurityNumber } from '../src/correct/SwedishSocialSecurit
 //NOTE THESE TESTS SHOULD NOT BE DEPENDENT ON SSNHelper BUT USE MOCKING
 describe('SwedishSocialSecurityNumber Tests', () => {
 
+    const validInput = '900515-1239'
+    const tooShort = '991217543'
 
     test('Test', () => {
-        const mockFn = jest.fn().mockReturnValue(42);
-        expect(mockFn()).toBe(42);
+        const mockHelper = {
+            isCorrectLength: jest.fn().mockReturnValue(false),
+            isCorrectFormat: jest.fn().mockReturnValue(false),
+            isValidMonth: jest.fn().mockReturnValue(true),
+            isValidDay: jest.fn().mockReturnValue(true),
+            luhnisCorrect: jest.fn().mockReturnValue(true)
+        }
+
+        expect(() => new SwedishSocialSecurityNumber(tooShort, mockHelper)).toThrow("To short, must be 11 characters");
+
     })
 
 });

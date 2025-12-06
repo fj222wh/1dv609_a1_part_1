@@ -9,7 +9,7 @@ class SwedishSocialSecurityNumber {
     constructor(stringInput, helper) {
         this.#helper = helper;
 
-        const trimmedSS = stringInput.trim(); 
+        const trimmedSS = stringInput.trim();
 
         if (helper.isCorrectLength(trimmedSS) === false) {
             throw new Error("To short, must be 11 characters");

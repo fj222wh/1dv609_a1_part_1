@@ -1,10 +1,11 @@
 import { SSNHelper } from '../src/correct/SSNHelper';
 
 describe('SSNHelper Tests', () => {
-    const snn_validInput = '991218-4382'
-    const snn_oneCharLessThanMinimum = '991218-438'
-    const snn_oneCharMoreThanMinimum = '991218-43889'
-    const snn_invalidFormat = '9912-173948'
+    const snn_validInput = '900515-1239'
+    const snn_invalid = '991203-1453'
+    const snn_oneCharLessThanMinimum = '900515-123'
+    const snn_oneCharMoreThanMinimum = '900515-12393'
+    const snn_invalidFormat = '90051512-39'
 
     const validMonthMin = '1'
     const validMonthMax = '12'
@@ -91,7 +92,7 @@ describe('SSNHelper Tests', () => {
 
 
     test('Should Return False When Checking Luhnis With Invalid Input', () => {
-        expect(ssnHelper.luhnisCorrect(snn_invalidFormat)).toBe(false)
+        expect(ssnHelper.luhnisCorrect(snn_invalid)).toBe(false)
     })
 
     test('Should Return True When Checking Luhnis With Valid Input', () => {
