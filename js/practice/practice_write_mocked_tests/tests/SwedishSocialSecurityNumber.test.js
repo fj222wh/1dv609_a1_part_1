@@ -16,11 +16,13 @@ describe('SwedishSocialSecurityNumber Tests', () => {
     const snn_oneCharMoreThanMinimum = '900515-12393'
     const snn_invalidFormat = '90051512-39'
 
+    // DO WE NEED MORE TESTS FOR EACH POSSIBLE DATA OR IS IT REDUNDANT?
+
     const validMonthMin = '1'
     const validMonthMax = '12'
     const invalidMonthOneBelowMin = '0'
     const invalidMonthOneAboveMax = '13'
-    const invalidMonth = 'hej'
+    const invalidMonth = '13'
 
     const validDay = '15'
     const validDayMin = '1'
@@ -52,6 +54,19 @@ describe('SwedishSocialSecurityNumber Tests', () => {
 
     
         expect(() => new SwedishSocialSecurityNumber(snn_too_short, mockHelper)).toThrow("To short, must be 11 characters");
+  
+    })
+
+    test('Constructor Should Throw Error If SSN is too short', () => {
+        const mockHelper = {
+            isCorrectLength: jest.fn().mockReturnValue(true),
+            isCorrectFormat: jest.fn().mockReturnValue(false),
+            isValidMonth: jest.fn().mockReturnValue(true),
+            isValidDay: jest.fn().mockReturnValue(true),
+            luhnisCorrect: jest.fn().mockReturnValue(true)
+        }
+
+        expect(() => new SwedishSocialSecurityNumber(snn_invalidFormat, mockHelper)).toThrow("Incorrect format, must be: YYMMDD-XXXX");
   
     })
 
@@ -109,7 +124,5 @@ describe('SwedishSocialSecurityNumber Tests', () => {
         const sut = new SwedishSocialSecurityNumber(snn_validInput, mockHelper)
         expect(sut.getDay()).toBe('15')
     })
-
-    
 
 });
