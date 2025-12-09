@@ -44,11 +44,14 @@ A bug in the SwedishSecurityNumber must not fail due to a bug in SSNHelper.
 
 
 ### Table for checking test suite bug coverage
-## SNN-helper
-![snn-helper summary](/img/summary_snn_helper.png)
+#### SNN-helper
+![snn-helper summary](/img/summary_snnhelper.png)
+
+#### SwedishSecurityNumber
+![ssn summary](/img/summary_ssn.png)
 
 
-## Total coverage
+#### Total coverage
 ![coverage](/img/coverage.png)
 
 
