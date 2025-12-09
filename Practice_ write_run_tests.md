@@ -53,4 +53,4 @@ Write a test suite for the Password class provided.
 ### Table for checking test suite bug coverage
 Create a table like this one for all the bugs and Tests, showing which test fails or succeeds for each test and the coverage. Use the table to remove tests that are redundant. You may shorten the bug-names to get a slimmer table. 
 
-![report t1](t1.png)
+![report password](/img/summary_password.png)

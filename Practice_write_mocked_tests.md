@@ -44,12 +44,12 @@ A bug in the SwedishSecurityNumber must not fail due to a bug in SSNHelper.
 
 
 ### Table for checking test suite bug coverage
-| SUT | Test | Correct SwedishSocialSecurityNumber | BuggySSNHelperWrongLength | Buggy Helper 2 | ... | |
-| --- | ---| --- | --- | --- | --- | --- |
-| SwedishSecurityNumber | Test name 1 | ✅ |  |  |  | | 
-| SwedishSecurityNumber | Test name 2 | ✅ |  |  |  | | 
-| SSNHelper  | Test name 3 |  | ✅ | ❌ |  | | |
-| Coverage |  | 100% | 100% | 100% | | |
+## SNN-helper
+![snn-helper summary](/img/summary_snn_helper.png)
+
+
+## Total coverage
+![coverage](/img/coverage.png)
 
 
 

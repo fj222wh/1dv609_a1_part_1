@@ -1,9 +1,9 @@
-import { SSNHelper } from '../src/correct/SSNHelper';
+// import { SSNHelper } from '../src/correct/SSNHelper';
 // import { SSNHelper } from '../src/bugs/BuggySSNHelperAllowDayUpTo30';
 // import { SSNHelper } from '../src/bugs/BuggySSNHelperAllowMonth0';
 // import { SSNHelper } from '../src/bugs/BuggySSNHelperIncorrectFormat';
 // import { SSNHelper } from '../src/bugs/BuggySSNHelperMessyLuhn';
-// import { SSNHelper } from '../src/bugs/BuggySSNHelperWrongLength';
+import { SSNHelper } from '../src/bugs/BuggySSNHelperWrongLength';
 
 describe('SSNHelper Tests', () => {
     const snn_validInput = '900515-1239'
@@ -40,7 +40,7 @@ describe('SSNHelper Tests', () => {
         expect(ssnHelper.isCorrectLength(snn_oneCharMoreThanMinimum)).toBe(false)
     });
 
-    test('Should return True If Format Is Valid', () => {
+    test('Should Return True If Format Is Valid', () => {
         expect(ssnHelper.isCorrectFormat(snn_validInput)).toBe(true)
     })
 
@@ -53,7 +53,7 @@ describe('SSNHelper Tests', () => {
     })
 
 
-    test('Should Return True For Valid Month (min value)', () => {
+    test('Should Return True For Valid Month (max value)', () => {
         expect(ssnHelper.isValidMonth(validMonthMax)).toBe(true)
     })
 
@@ -65,7 +65,7 @@ describe('SSNHelper Tests', () => {
         expect(ssnHelper.isValidMonth(invalidMonthOneAboveMax)).toBe(false)
     })
 
-    test('Should Return False For Invalid Month', () => {
+    test('Should Return False For Invalid Month (not a number)', () => {
         expect(ssnHelper.isValidMonth(invalidMonth)).toBe(false)
     })
 
@@ -83,15 +83,15 @@ describe('SSNHelper Tests', () => {
     })
 
 
-    test('Should Return False For A Valid Day (one less than boundary value)', () => {
+    test('Should Return False For A Valid Day (one below minimum)', () => {
         expect(ssnHelper.isValidDay(invalidDayOneBelowMin)).toBe(false)
     })
 
-    test('Should Return False For A Valid Day (one above than boundary value)', () => {
+    test('Should Return False For An Invalid Day (one above max)', () => {
         expect(ssnHelper.isValidDay(invalidDayOneAboveMax)).toBe(false)
     })
 
-    test('Should Return False For A Valid Day (not a number)', () => {
+    test('Should Return False For An Invalid Day (not a number)', () => {
         expect(ssnHelper.isValidDay(invalidDayNotANumber)).toBe(false)
     })
 
