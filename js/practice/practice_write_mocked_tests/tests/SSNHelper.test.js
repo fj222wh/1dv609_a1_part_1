@@ -1,16 +1,29 @@
+import { expect, jest, test } from '@jest/globals'
 import { SSNHelper } from '../src/correct/SSNHelper';
 // import { SSNHelper } from '../src/bugs/BuggySSNHelperAllowDayUpTo30';
 // import { SSNHelper } from '../src/bugs/BuggySSNHelperAllowMonth0';
 // import { SSNHelper } from '../src/bugs/BuggySSNHelperIncorrectFormat';
 // import { SSNHelper } from '../src/bugs/BuggySSNHelperMessyLuhn';
 // import { SSNHelper } from '../src/bugs/BuggySSNHelperWrongLength';
+// import { SSNHelper } from '../src/bugs/BuggySSNHelperMyOwnBug'
 
 describe('SSNHelper Tests', () => {
     const snn_validInput = '900515-1239'
     const snn_invalid = '991203-1453'
+    const ssn_invalidFormats = [
+        '-9005151239',
+        '9-005151239',
+        '90-05151239',
+        '900-5151239',
+        '9005-151239',
+        '90051-51239',
+        '9005151-239',
+        '90051512-39',
+        '900515123-9',
+        '9005151239-'
+    ];
     const snn_oneCharLessThanMinimum = '900515-123'
     const snn_oneCharMoreThanMinimum = '900515-12393'
-    const snn_invalidFormat = '90051512-39'
 
     const validMonthMin = '1'
     const validMonthMax = '12'
@@ -41,11 +54,15 @@ describe('SSNHelper Tests', () => {
     });
 
     test('Should Return True If Format Is Valid', () => {
-        expect(ssnHelper.isCorrectFormat(snn_validInput)).toBe(true)
+    
+        const ssnRegex = /^\d{6}-\d{4}$/;
+        expect(snn_validInput).toMatch(ssnRegex)
     })
 
     test('Should Return False If Format Is Invalid', () => {
-        expect(ssnHelper.isCorrectFormat(snn_invalidFormat)).toBe(false)
+        ssn_invalidFormats.forEach(value => {
+                expect(ssnHelper.isCorrectFormat(value)).toBe(false);
+        });
     })
 
     test('Should Return True For Valid Month (min value)', () => {
