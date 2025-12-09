@@ -1,9 +1,10 @@
+
 import { expect, jest, test } from '@jest/globals'
-import { SwedishSocialSecurityNumber } from '../src/correct/SwedishSocialSecurityNumber.js';
+// import { SwedishSocialSecurityNumber } from '../src/correct/SwedishSocialSecurityNumber.js';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoLenCheck';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoTrim';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecutityNumberNoLuhn';
-// import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecutityNumberWrongYear';
+import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecutityNumberWrongYear';
 
 
 //NOTE THESE TESTS SHOULD NOT BE DEPENDENT ON SSNHelper BUT USE MOCKING
@@ -19,7 +20,7 @@ describe('SwedishSocialSecurityNumber Tests', () => {
 
 
 
-    test('Should be able to create a SNN with valid input', () => {
+    test('Should Not Throw When Creating A SNN With Valid Input', () => {
         const mockHelper = {
             isCorrectLength: jest.fn().mockReturnValue(true),
             isCorrectFormat: jest.fn().mockReturnValue(true),
@@ -31,7 +32,7 @@ describe('SwedishSocialSecurityNumber Tests', () => {
 
     })
 
-    test('Constructor Should Throw Error If SSN is too short', () => {
+    test('Constructor Should Throw Error If SSN Is Too Short', () => {
         const mockHelper = {
             isCorrectLength: jest.fn().mockReturnValue(false),
             isCorrectFormat: jest.fn().mockReturnValue(false),
@@ -95,7 +96,7 @@ describe('SwedishSocialSecurityNumber Tests', () => {
         expect(() => new SwedishSocialSecurityNumber(snn_invalidLuhnis, mockHelper)).toThrow('Invalid SSN according to Luhn\'s algorithm')
     })
 
-    test('Should Trim White Spaces', () => {
+    test('Should Call All Helper Methods Correctly With Trimmed White Spaces', () => {
         const mockHelper = {
             isCorrectLength: jest.fn().mockReturnValue(true),
             isCorrectFormat: jest.fn().mockReturnValue(true),
@@ -110,7 +111,7 @@ describe('SwedishSocialSecurityNumber Tests', () => {
         expect(mockHelper.luhnisCorrect).toHaveBeenCalledWith(snn_validInput)
     })
 
-    test('Should Return The Corresponding Year', () => {
+    test('Should Return The Year', () => {
         const mockHelper = {
             isCorrectLength: jest.fn().mockReturnValue(true),
             isCorrectFormat: jest.fn().mockReturnValue(true),
@@ -124,7 +125,7 @@ describe('SwedishSocialSecurityNumber Tests', () => {
     })
 
 
-    test('Should Return The Corresponding Month', () => {
+    test('Should Return The Month', () => {
         const mockHelper = {
             isCorrectLength: jest.fn().mockReturnValue(true),
             isCorrectFormat: jest.fn().mockReturnValue(true),
@@ -137,7 +138,7 @@ describe('SwedishSocialSecurityNumber Tests', () => {
         expect(sut.getMonth()).toBe('05')
     })
 
-    test('Should Return The Corresponding Day', () => {
+    test('Should Return The Day', () => {
         const mockHelper = {
             isCorrectLength: jest.fn().mockReturnValue(true),
             isCorrectFormat: jest.fn().mockReturnValue(true),
@@ -150,7 +151,7 @@ describe('SwedishSocialSecurityNumber Tests', () => {
         expect(sut.getDay()).toBe('15')
     })
 
-    test('Should Return The Corresponding Day', () => {
+    test('Should Return The SerialNumber', () => {
         const mockHelper = {
             isCorrectLength: jest.fn().mockReturnValue(true),
             isCorrectFormat: jest.fn().mockReturnValue(true),
