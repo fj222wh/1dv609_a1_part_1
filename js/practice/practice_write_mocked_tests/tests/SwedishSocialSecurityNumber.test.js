@@ -1,5 +1,5 @@
 
-import { expect, jest, test } from '@jest/globals'
+import { beforeEach, expect, jest, test } from '@jest/globals'
 import { SwedishSocialSecurityNumber } from '../src/correct/SwedishSocialSecurityNumber.js';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoLenCheck';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoTrim';
@@ -19,30 +19,28 @@ describe('SwedishSocialSecurityNumber Tests', () => {
     const snn_invalidDay = '901234-1239'
     const snn_invalidLuhnis = '991217-3686'
 
+    let mockHelper;
 
-
-    test('Should Not Throw When Creating A SNN With Valid Input', () => {
-        const mockHelper = {
+    beforeEach(() => {
+            mockHelper = {
             isCorrectLength: jest.fn().mockReturnValue(true),
             isCorrectFormat: jest.fn().mockReturnValue(true),
             isValidMonth: jest.fn().mockReturnValue(true),
             isValidDay: jest.fn().mockReturnValue(true),
             luhnisCorrect: jest.fn().mockReturnValue(true)
         }
+    })
+
+
+
+    test('Should Not Throw When Creating A SNN With Valid Input', () => {
         expect(() => new SwedishSocialSecurityNumber(snn_validInput, mockHelper)).not.toThrow();
 
     })
 
     test('Constructor Should Throw Error If SSN Is Too Short', () => {
-        const mockHelper = {
-            isCorrectLength: jest.fn().mockReturnValue(false),
-            isCorrectFormat: jest.fn().mockReturnValue(false),
-            isValidMonth: jest.fn().mockReturnValue(true),
-            isValidDay: jest.fn().mockReturnValue(true),
-            luhnisCorrect: jest.fn().mockReturnValue(true)
-        }
-
-    
+        mockHelper.isCorrectLength = jest.fn().mockReturnValue(false)
+        mockHelper.isCorrectFormat = jest.fn().mockReturnValue(false)
         expect(() => new SwedishSocialSecurityNumber(snn_too_short, mockHelper)).toThrow("To short, must be 11 characters");
 
     })
