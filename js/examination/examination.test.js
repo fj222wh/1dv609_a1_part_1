@@ -4,7 +4,7 @@ import { GameView } from './examination';
 
 
 describe('Examination tests', () => {
-    test('placeholder', () => {
+    test('Examination', () => {
 
         const mockModel = {
             getScore: jest.fn().mockReturnValue(10)
@@ -15,8 +15,6 @@ describe('Examination tests', () => {
         const expected = "<h2>Poäng: 10 </h2>"
 
         expect(result).toBe(expected)
-
-
     });
 
 
